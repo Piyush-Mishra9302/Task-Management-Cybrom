@@ -4,14 +4,19 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 const adminRoute = require("./routes/adminRoutes")
-app.use(cors({
-  origin: allowedOrigins,
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true, // if you're using cookies/auth headers
-}));
+
 const app = express();
 const port = 8000;
 
+app.use(
+  cors({
+    origin: "https://task-management-cybrom-2.onrender.com", // your frontend
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true, // only if you’re using cookies or auth headers
+  })
+);
+
+app.options("*", cors());
 
 //DB connection
 mongoose.connect(process.env.DBCONN).then(() => {
