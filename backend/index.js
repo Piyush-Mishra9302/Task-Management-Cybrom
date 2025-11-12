@@ -4,7 +4,11 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 const adminRoute = require("./routes/adminRoutes")
-
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true, // if you're using cookies/auth headers
+}));
 const app = express();
 const port = 8000;
 
@@ -18,7 +22,7 @@ mongoose.connect(process.env.DBCONN).then(() => {
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json());
 
-app.use(cors());
+
 app.use("/admin", adminRoute);
 
 
