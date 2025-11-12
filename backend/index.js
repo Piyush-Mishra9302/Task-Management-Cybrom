@@ -16,7 +16,7 @@ app.use(
   })
 );
 
-app.options("*", cors());
+ app.options(/.*/, cors());
 
 //DB connection
 mongoose.connect(process.env.DBCONN).then(() => {
